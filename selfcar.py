@@ -7,33 +7,19 @@
 import cv2
 import numpy as nn
 
-#Detect particular colored balloons
+#Lane detection
 def detect():
-    #argument - color
-    print('not done yet')
-    #returns coordinates [x,y]
-
-
-#In case balloons of same color
-def dist():
-    #arguments - coordinates x,y
-    print('not done yet')
-    #returns distance
-
-
-
-#Go through balloons in sequence
-def seq():
-    #argument - colors available
     print('not done yet')
 
 
-
-#Algorithm to move arm to required coordinates
+#Motion Control Algorithm
 def move():
-    #arguments - coordinates x,y
     print('not done yet')
 
+
+#Transmission
+def trans():
+    print('not done yet')
 
 #Main function
 def main():
