@@ -8,35 +8,34 @@ import cv2
 import numpy as np
 
 #Take input from camera
-cap = cv2.VideoCapture(0)
+#cap = cv2.VideoCapture(0)
 
 #Lane detection
 def detect():
     print('not done yet')
     while True:
         #Take camera input
-        ret,frame = cap.read()
-        frame = cv2.imread('lane1.png')
+        #ret,frame = cap.read()
+        frame = cv2.imread('lane3.png')
         #Convert to HSV format
         hsv = cv2.cvtColor(frame,cv2.COLOR_BGR2HSV)
         gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
         #Find the tracklines
         #black_lower = np.array([0,0,0])
         #black_upper = np.array([180,255,50])
-        lower = np.array([20,0,0])
-        upper = np.array([30,255,255])
+        lower = np.array([0,0,0])
+        upper = np.array([180,255,50])
         #Convert to binary image
         #bin = cv2.inRange(hsv,black_lower,black_upper)
         bin = cv2.inRange(hsv,lower,upper)
         #Apply morphological transformations
-        bin = cv2.GaussianBlur(bin,(5,5),0)
+        bin = cv2.GaussianBlur(bin,(5,5),2)
         #Bitwise AND on Grayscale
         masked = cv2.bitwise_and(gray,gray,mask=bin)
         #Canny Edge detection
-        canny_edges = cv2.Canny(masked,50,150)
-        #Region of interest
+        canny_edges = cv2.Canny(bin,50,100)
         #Apply Hough Line Transform to get the tracklines
-        hough = cv2.HoughLinesP(canny_edges, 2, np.pi/180, 20, np.array([]),50,200)
+        hough = cv2.HoughLinesP(canny_edges, 1, np.pi/180, 100, np.array([]),100,200)
         #Get only the required lines
         #Draw the lines on feed
         show = frame.copy()
@@ -46,12 +45,14 @@ def detect():
         #Control over removed tracklines
         #Show the feed
         cv2.imshow('EDGES',canny_edges)
-        cv2.imshow('FRAME',show)
+        cv2.imshow('EE', masked)
+        cv2.imshow('FRAME',bin)
+        cv2.imshow('GRAY',show)
         #waitKey
         k = cv2.waitKey(5) & 0xFF
         if k == 27:
             break
-    cap.release()
+    #cap.release()
     cv2.destroyAllWindows()
 
 #Motion Control Algorithm
