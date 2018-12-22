@@ -1,4 +1,4 @@
-#Auto-Nav-Car
+# Auto-Nav-Car
 
 The computer vision sub-system for a miniature autonomous car.
 
