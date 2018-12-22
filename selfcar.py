@@ -31,6 +31,7 @@ def run(thresh):
     global size_x
     global size_y
     global crop_y
+    framenumber = 0
     start = time.time()
     print('Starting Detection')
     time.sleep(1)
@@ -38,6 +39,8 @@ def run(thresh):
     while True:
         #Get image
         ret, frame = cap.read()
+        framenumber += 1
+        print("Frame-Number : ", framenumber)
         crop_top = thresh[0]
         crop_bottom = thresh[1]
         lower = thresh[2]
@@ -97,8 +100,11 @@ def run(thresh):
         cv2.putText(new,str(angle),(centre_x,size_y-5),font,0.5,(0,255,0),1,cv2.LINE_AA)
         #Show images
         cv2.imshow('NEW',new)
+        cv2.imshow('MASK', mask)
         #Transmit Speeds
         transmit(angle)
+        #Change this for frame rate
+        time.sleep(0.2)
         k = cv2.waitKey(5) & 0xFF
         if k == 27:
             break
@@ -166,7 +172,7 @@ def calibrate():
         cv2.imshow('Mask',mask)
         cv2.imshow('Frame',gray)
         k = cv2.waitKey(5) & 0xFF
-        if k == 27:
+        if k == 13:
             break
     #cap.release()
     cv2.destroyAllWindows()
