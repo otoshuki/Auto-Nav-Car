@@ -2,5 +2,5 @@
 
 The computer vision sub-system for a miniature autonomous car.
 
-Independent project during Kriti-2018
+Project during Kriti-2018
 
